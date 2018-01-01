@@ -1,0 +1,20 @@
+# Create this via:
+# sudo nano /etc/systemd/system/emp.service
+#
+# See: http://rpi-controlcenter.de/index.php?thread/1197-autostart-mit-raspbian-stretch/
+#
+# sudo systemctl start emp.service
+# sudo systemctl enable emp.service
+
+[Unit]
+Description=EMP sensor
+
+[Service]
+Type=idle
+WorkingDirectory=/home/pi/scripts/emp_detector/
+ExecStart=/usr/bin/python /home/pi/scripts/emp_detector/emp_detector.py >> /home/pi/scripts/emp_detector/emp_detector.log
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
